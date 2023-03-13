@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    public static float speed = 0.25f;
+    public static float speed = 0.13f;
 
     // Start is called before the first frame update
     void Start()
@@ -89,9 +89,18 @@ public class Move : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.P))
         {
+            
             Vector3 characterScale = transform.localScale;
-            characterScale.x += 0.2f;
-            characterScale.y += 0.2f;
+            if(characterScale.x < -0)
+            {
+                characterScale.x -= 0.2f;
+                characterScale.y += 0.2f;
+            } else
+            {
+                characterScale.x += 0.2f;
+                characterScale.y += 0.2f;
+            }
+            
             transform.localScale = characterScale;
         }
 
@@ -101,8 +110,13 @@ public class Move : MonoBehaviour
             if(characterScale.x > 0.2f && characterScale.y > 0.2f ) {
                 characterScale.x -= 0.2f;
                 characterScale.y -= 0.2f;
-                transform.localScale = characterScale;
+               
+            } else if(characterScale.x < -0.2f && characterScale.y > 0.2f)
+            {
+                characterScale.x += 0.2f;
+                characterScale.y -= 0.2f;
             }
+            transform.localScale = characterScale;
         }
 
     }
