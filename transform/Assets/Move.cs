@@ -49,8 +49,7 @@ public class Move : MonoBehaviour
             transform.Translate(vec);
         }*/
 
-        Vector3 vec = new Vector3(speed * Input.GetAxis("Horizontal"), speed * Input.GetAxis("Vertical"), 0.0f);
-        transform.Translate(vec);
+        
 
         /*if(Input.GetAxis("Horizontal") < 0)
         {
@@ -119,5 +118,11 @@ public class Move : MonoBehaviour
             transform.localScale = characterScale;
         }
 
+    }
+
+    void FixedUpdate()
+    {
+        Vector3 vec = new Vector3(speed * Input.GetAxis("Horizontal"), speed * Input.GetAxis("Vertical"), 0.0f);
+        transform.Translate(vec);
     }
 }
