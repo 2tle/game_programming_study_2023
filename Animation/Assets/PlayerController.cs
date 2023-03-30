@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    Animator anim;
     Rigidbody2D rb;
     public float jump = 100;
     public float walk = 10;
@@ -14,12 +16,15 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       
+
+
 
         int dir = 0;
         if (Input.GetKey(KeyCode.LeftArrow)) dir = -1;
@@ -36,10 +41,17 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(dir, 1, 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && rb.velocity.y==0)
         {
             rb.AddForce(transform.up * jump);
         }
+
+        if (transform.position.y < -5)
+        {
+            SceneManager.LoadScene("GameScene");
+        }
+
+        anim.speed = speed / 2.0f;
 
     }
 }
