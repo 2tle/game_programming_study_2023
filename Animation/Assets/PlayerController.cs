@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && rb.velocity.y==0)
         {
             rb.AddForce(transform.up * jump);
+            anim.SetTrigger("JumpTrigger");
         }
 
         if (transform.position.y < -5)
@@ -51,7 +53,10 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("GameScene");
         }
 
-        anim.speed = speed / 2.0f;
+        if (rb.velocity.y == 0) { anim.speed = speed / 2.0f; }
+        else anim.speed = 1.0f;
+
+        
 
     }
 }
