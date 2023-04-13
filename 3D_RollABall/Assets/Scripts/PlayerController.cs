@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public int itemCount = 0;
     public GameManager manager;
     public ItemGenerator itemGenerator;
+    bool isGround;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,17 +24,26 @@ public class PlayerController : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
         rb.AddForce(new Vector3(h, 0, v) * speed);
     }
+    private void OnCollisionStay(Collision collision)
+    {
+        isGround = true;
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        isGround = false;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Jump") && rb.velocity.y==0)
+        if(Input.GetButtonDown("Jump") && isGround)
         {
             rb.AddForce(Vector3.up * jumppower);
         }
 
-        if (transform.position.y < -2 ) {
+        if (transform.position.y < -5 ) {
             SceneManager.LoadScene("Stage" + (manager.Stage).ToString());
+            //transform.position = new Vector3(0, 1, 0);
         }
         
     }
