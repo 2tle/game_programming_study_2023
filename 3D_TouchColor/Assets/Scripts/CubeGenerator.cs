@@ -31,6 +31,7 @@ public class CubeGenerator : MonoBehaviour
                 int index = Random.Range(0, cubeColors.Length);
                 mrs[i].material.color = cubeColors[index];
             }
+            span *= 0.98f;
             yield return new WaitForSeconds(span);
         }
     }

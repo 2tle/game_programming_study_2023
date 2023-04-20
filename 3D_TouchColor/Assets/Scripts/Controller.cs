@@ -33,4 +33,16 @@ public class Controller : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        MeshRenderer r = other.GetComponent<MeshRenderer>();
+        if(MR.material.color == r.material.color)
+        {
+            Checker.correct++;
+        } else
+        {
+            Checker.wrong++;
+        }
+    }
 }
